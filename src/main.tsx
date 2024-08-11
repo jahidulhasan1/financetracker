@@ -1,10 +1,22 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.tsx";
+import "./index.css";
+import { ClerkProvider } from "@clerk/clerk-react";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+import { FinanceProvider } from "./contexts/financeContext";
+
+if (!PUBLISHABLE_KEY) {
+  throw new Error("Missing Publishable Key");
+}
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+    <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
+      <FinanceProvider>
+        <App />
+      </FinanceProvider>
+    </ClerkProvider>
+  </React.StrictMode>
+);

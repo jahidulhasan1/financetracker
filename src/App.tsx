@@ -1,13 +1,31 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Auth } from "./pages/auth";
+import { Dashboard } from "./pages/dashboard";
+import Header from "./components/Header";
+import Home from "./pages/Home";
 
-function App() {
+export const routerV = createBrowserRouter([
+  {
+    path: "/",
+    // element:  <Home />
+  },
+  {
+    path: "/login",
+    element: <Auth />,
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+  },
+]);
+
+export default function App() {
+
 
   return (
- <>
- 
- <h2>hello</h2>
- <h5>hello</h5>
- </>
-  )
+    <div>
+      <Header />
+      <RouterProvider router={routerV}></RouterProvider>
+    </div>
+  );
 }
-
-export default App;
